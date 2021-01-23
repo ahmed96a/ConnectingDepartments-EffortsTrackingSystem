@@ -1,4 +1,4 @@
-<h2 align="center"> ConnectingDepartments & EffortsTrackingSystem </h2>
+<h2 align="center"> ConnectingDepartments & EffortsTrackingSystem Application </h2>
 Web Application that enable communication between different departments of the organization, Which means an employee in any department can request task from another employee in any other department.
 It allows the departments admins to assign tasks to their employees, also provides a dashboard to view the statistics of the tasks.
 Also it tracks the employees efforts (The tasks that the employee had completed) in each department.
