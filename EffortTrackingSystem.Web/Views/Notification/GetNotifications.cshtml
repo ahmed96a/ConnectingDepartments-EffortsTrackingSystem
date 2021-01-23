@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EffortTrackingSystem.Models.Dtos.NotificationDto>
+
+@{
+    ViewData["Title"] = "GetNotifications";
+}
+
+<h1>Notifications</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+                @if (item.IsRead == false)
+                {
+                    <span style="background-color: #e84848;color: white; font-size: 9px; display: inherit; padding: 3px; border-radius: 5px;">New</span>
+                }
+            </td>
+            @*<td style="max-width: 230px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+                @Html.Raw(item.Details)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.ActionLink("Open in New Tab", "OpenNotification", new { id = item.Id }, new { @class = "btn btn-success", target = "_blank" })
+                @if (!item.IsRead)
+                {
+                    <text>| </text> @Html.ActionLink("Mark as Read", "MarkAsRead", new { id = item.Id }, new { @class = "btn btn-primary" })
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

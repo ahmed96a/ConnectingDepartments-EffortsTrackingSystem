@@ -1,0 +1,92 @@
+﻿@model EffortTrackingSystem.Models.Dtos.MissionsCountDto
+@{
+    ViewData["Title"] = "ManageSentTasks";
+}
+
+<h1 class="text-center m-4">Manage Sent Tasks</h1>
+
+<!-- Small boxes (Stat box) -->
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@Model.RunningCount</h3>
+
+                <p>Running Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-bag"></i>*@
+                <i class="fa fa-spinner"></i>
+            </div>
+            <a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Sended" asp-route-missionState="running" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-orange">
+            <div class="inner">
+                <h3>@Model.WaitingCount</h3>
+
+                <p>Waiting Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-stats-bars"></i>*@
+                <i class="fa fa-exclamation"></i>
+            </div>
+            <a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Sended" asp-route-missionState="waiting" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@Model.CompletedCount</h3>
+
+                <p>Completed Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-person-add"></i>*@
+                <i class="fa fa-check-circle"></i>
+                @*<ion-icon name="checkmark-circle-outline"></ion-icon>*@
+            </div>
+            <a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Sended" asp-route-missionState="completed" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@Model.RefusedCount</h3>
+
+                <p>Refused Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-pie-graph"></i>*@
+                <i class="fa fa-times-circle"></i>
+            </div>
+            <a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Sended" asp-route-missionState="refused" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="offset-4 col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-white">
+            <div class="inner">
+                <h3>@Model.ApprovedCount</h3>
+
+                <p>Approved Tasks <span style="font-size: small">By Me</span></p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-stats-bars"></i>*@
+                <i class="fa fa-thumbs-up"></i>
+            </div>
+            <a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Sended" asp-route-missionState="approved" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+<!-- /.row -->

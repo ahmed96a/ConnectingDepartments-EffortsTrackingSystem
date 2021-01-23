@@ -1,0 +1,130 @@
+﻿
+@{
+    Layout = null;
+}
+@model EffortTrackingSystem.Models.Dtos.LoginAndRegisterDto;
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+    <link rel="stylesheet" href="~/css/StyleSheet.css" />
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        };
+    </script>
+</head>
+<body>
+
+    <div class="login-wrap ">
+        <div class="login-html">
+            <div id="Header">
+                <b> Effort Tracker</b>
+            </div>
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+
+            <div class="login-form">
+                <form class="sign-in-htm" asp-action="Login" method="post" asp-controller="account">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="group">
+                        <label asp-for="loginDto.Email" class="label" id="start"> Email </label>
+                        <input id="user" class="input" asp-for="loginDto.Email">
+                        <span asp-validation-for="loginDto.Email" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label asp-for="loginDto.Password" class="label"> Password </label>
+                        <input id="pass" class="input" data-type="password" asp-for="loginDto.Password">
+                        <span asp-validation-for="loginDto.Password" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <input id="check" class="check" asp-for="loginDto.RememberMe">
+                        <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                        <span asp-validation-for="loginDto.RememberMe" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Sign In">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="#forgot">Forgot Password?</a>
+                    </div>
+                </form>
+                <form class="sign-up-htm" asp-action="Register" method="post" asp-controller="account">
+                    <div class="group">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <label class="label" asp-for="registerDto.Email"> Email</label>
+                        <input id="user" asp-for="registerDto.Email" class="input">
+                        <span asp-validation-for="registerDto.Email" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label class="label" asp-for="registerDto.FullName"> FullName </label>
+                        <input class="input" asp-for="registerDto.FullName">
+                        <span asp-validation-for="registerDto.FullName" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label" asp-for="registerDto.JobTitle"> Job Title </label>
+                        <input id="pass" class="input" asp-for="registerDto.JobTitle">
+                        <span asp-validation-for="registerDto.JobTitle" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label asp-for="registerDto.DepartmentId" class="label"> Department </label>
+                        <select asp-for="registerDto.DepartmentId" class="input" style="background-color: transparent" asp-items="@ViewBag.DepartmentsSelectList">
+                            <option class="dropdown-item-text" value="" selected> Select Department </option>
+                        </select>
+                        <span asp-validation-for="registerDto.DepartmentId" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label" asp-for="registerDto.PhoneNumber"> Phone 1 </label>
+                        <input id="pass" class="input" asp-for="registerDto.PhoneNumber">
+                        <span asp-validation-for="registerDto.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label" asp-for="registerDto.Phone2"> Phone 2 (Optional) </label>
+                        <input id="pass" class="input" asp-for="registerDto.Phone2">
+                        <span asp-validation-for="registerDto.Phone2" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label" asp-for="registerDto.HireDate"> Hire Date </label>
+                        <input id="pass" class="input" asp-for="registerDto.HireDate">
+                        <span asp-validation-for="registerDto.HireDate" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label" asp-for="registerDto.Password"> Password </label>
+                        <input id="pass" class="input" asp-for="registerDto.Password">
+                        <span asp-validation-for="registerDto.Password" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label" asp-for="registerDto.ConfirmPassword"> Confirm Password </label>
+                        <input id="pass" class="input" asp-for="registerDto.ConfirmPassword">
+                        <span asp-validation-for="registerDto.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Sign Up">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="tab-1">  Already Member? </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+</body>
+</html>

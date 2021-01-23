@@ -1,0 +1,119 @@
+﻿@model IEnumerable<EffortTrackingSystem.Models.Dtos.MissionDto>
+
+@{
+    ViewData["Title"] = "GetAllMissionsForCategory";
+}
+
+<h1>GetAllMissionsForCategory</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiverId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Priority)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expected_Deadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Task_CompleteDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Is_Completed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Is_Approved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cancel_Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attachment_Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category_Id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiverId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expected_Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task_CompleteDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Is_Completed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Is_Approved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cancel_Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attachment_Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category_Id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

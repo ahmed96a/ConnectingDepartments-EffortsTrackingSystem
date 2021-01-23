@@ -1,0 +1,81 @@
+﻿1- Configure SignalR in the server application (webapi project).
+   - \EffortTrackingSystem.API\Startup.cs
+
+2- Enable Cors in server application (webapi project) since the client application and server application have different origins.
+   - \EffortTrackingSystem.API\Startup.cs
+   Notes => https://docs.microsoft.com/en-us/aspnet/core/signalr/security?view=aspnetcore-3.1
+            https://trailheadtechnology.com/breaking-change-in-aspnetcore-2-2-for-signalr-and-cors/
+            https://stackoverflow.com/questions/54138119/signalr-client-connection-closes-straight-after-starting-invalidoperationexc
+
+*- General Resources => https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-3.1
+                        https://docs.microsoft.com/en-us/aspnet/core/signalr/groups?view=aspnetcore-5.0
+                        https://docs.microsoft.com/en-us/aspnet/core/signalr/configuration?view=aspnetcore-3.1&tabs=dotnet#configure-bearer-authentication
+
+                        (Users, Groups, connectionIds)
+                        https://stackoverflow.com/questions/50367586/connection-id-when-calling-signalr-core-hub-method-from-controller
+                        https://code-maze.com/how-to-send-client-specific-messages-using-signalr/
+
+                        (General Resource)
+                        https://damienbod.com/2017/09/12/getting-started-with-signalr-using-asp-net-core-and-angular/
+
+3- Install signalr client library in the cient application and reference it.
+   - \EffortTrackingSystem.Web\libman.json
+   - \EffortTrackingSystem.Web\Views\Shared\_Layout.cshtml
+
+4- SignalR server side Hub Code and Notification logic code.
+   - \EffortTrackingSystem.API\Hubs\NotificationHub.cs
+   - \EffortTrackingSystem.API\Models\Repository\IRepository\INotificationRepository.cs
+   - \EffortTrackingSystem.API\Models\Repository\NotificationRepository.cs
+   - \EffortTrackingSystem.API\Controllers\MissionController.cs
+
+5- SignalR client side code.
+   - \EffortTrackingSystem.Web\wwwroot\js\site.js
+
+6- SignalR authetication and it's relation with Clients.User property that used to call client method for specific user.
+  - https://docs.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz?view=aspnetcore-3.1
+  - https://docs.microsoft.com/en-us/aspnet/core/signalr/configuration?view=aspnetcore-3.1&tabs=dotnet#configure-bearer-authentication
+  - https://codeopinion.com/practical-asp-net-core-signalr-authorization/
+  - https://damienbod.com/2017/10/16/securing-an-angular-signalr-client-using-jwt-tokens-with-asp-net-core-and-identityserver4/
+
+7- Using ConnectionId instead of User.
+  - https://www.zealousweb.com/signalr-to-send-real-time-notifications-with-asp-net-core/
+  - https://nanobrasca.medium.com/how-to-build-a-real-time-notification-system-using-signalr-core-1fd4160454fa
+  - https://code-maze.com/how-to-send-client-specific-messages-using-signalr/
+
+
+----------------------------------------------------
+
+Notifications Module.
+---------------------
+
+API
+---
+
+1- Controllers\MissionController.cs   // Other solution, call hub method from the controller
+2- Controllers\NotificationController.cs
+3- Models\Repository\IRepository\INotificationRepository.cs
+4- Models\Repository\NotificationRepository.cs
+5- Hubs\NotificationHub.cs
+6- Startup.cs
+
+***************
+
+Web
+---
+
+1- Models\Repository\IRepository\INotificationRepository.cs
+2- Models\Repository\NotificationRepository.cs
+3- Controllers\NotificationController.cs
+5- appsettings.json
+6- wwwroot\js\site.js
+7- Views\Shared\_Layout.cshtml
+8- Views\Notification\GetNotifications.cshtml
+9- Views\Notification\OpenNotification.cshtml
+
+*************
+
+Models
+------
+
+1- Models\Notification.cs
+2- Dtos\NotificationDto.cs

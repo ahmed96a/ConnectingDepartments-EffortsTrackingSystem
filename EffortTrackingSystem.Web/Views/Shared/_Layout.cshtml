@@ -1,0 +1,228 @@
+﻿@*<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EffortTrackingSystem.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EffortTrackingSystem.Web</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-controller="Account" asp-action="LogOut">
+                                    <button class="btn btn-link nav-link text-dark">Logout</button>
+                                </form>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Department</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="GetAllUsers">Users</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="EditProfile">EditProfile</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mission" asp-action="GetAllMissionsForDepartment">GetAllMissionsForDepartment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mission" asp-action="GetAllMissionsForCategory">GetAllMissionsForCategory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mission" asp-action="GetAllSendedMissionsOfUser">GetAllSendedMissionsOfUser</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mission" asp-action="GetAllReceivedMissionsOfUser">GetAllReceivedMissionsOfUser</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mission" asp-action="GetAllFilteredMissions">GetAllFilteredMissions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mission" asp-action="SendMission">SendMission</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Mission" asp-action="AssignTaskToUser">AssignTaskToUser</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - EffortTrackingSystem.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>*@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Effort Tracker - Home</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/OurStyles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,wght@1,500&display=swap" rel="stylesheet">
+
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/css/adminlte.min.css">
+
+    @*Save JWToken in the localStorage to use it in signalr for authentication*@
+    @if(TempData.ContainsKey("JWToken"))
+    {
+        <script>
+            localStorage.setItem("JWToken", "@TempData["JWToken"].ToString()");
+        </script>
+    }
+
+</head>
+<body  style="        font-family: 'Piazzolla', serif; background-color: gainsboro">
+
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+        <img src="~/dist/img/evalogo.jpg" class="brand-image img-circle elevation-3" style="opacity: .8; width: 30px; margin-right: 10px" />
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            Effort <b style="        color: dodgerblue
+"> Tracker </b>
+        </a>
+
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link" asp-area="" asp-controller="Account" asp-action="Index"><i class="fa fa-users"></i><span> Register/Login </span></a>
+                </div>
+
+            </div>
+        }
+        else
+        {
+            <!-- Collection of nav links, forms, and other content for toggling -->
+            <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i><span> Home </span></a>
+                    <a asp-controller="Mission" asp-action="SendMission" class="nav-item nav-link"><i class="fa fa-plus"></i><span> Send Task </span></a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+                    {
+                        <a asp-controller="Dashboard" asp-action="Index" class="nav-item nav-link"><i class="fa fa-gears"></i><span> Dashboard </span></a>
+
+                        @if (User.IsInRole("SuperAdmin"))
+                        {
+                            <a asp-controller="Department" asp-action="Index" class="nav-item nav-link"><i class="fa fa-window-restore"></i><span> Departments </span></a>
+                        }
+
+                        <a asp-controller="Category" asp-action="Index" class="nav-item nav-link"><i class="fa fa-users"></i><span> Categories </span></a>
+                        <a asp-controller="Home" asp-action="Reports" class="nav-item nav-link"><i class="fa fa-pie-chart"></i><span> Reports </span></a>
+                    }
+                    @{
+                        string departmentName = "";
+                        if (User.FindFirst(x => x.Type == "DepartmentName") != null)
+                            departmentName = User.FindFirst(x => x.Type == "DepartmentName").Value;
+                    }
+                    @if (User.IsInRole("User") && (departmentName.ToLower().Trim() == "hr" || departmentName.ToLower().Trim() == "graphic design"))
+                    {
+                        <a asp-controller="Mission" asp-action="ManageReceivedTasks" class="nav-item nav-link"><i class="fa fa-tasks"></i><span>Manage Received Tasks</span></a>
+                    }
+
+                    <a asp-controller="Mission" asp-action="ManageSentTasks" class="nav-item nav-link"><i class="fa fa-tasks"></i><span>Manage Sent Tasks</span></a>
+
+                    @*<a asp-controller="Home" asp-action="Notifications" class="nav-item nav-link"><i class="fa fa-bell"></i><span> Notifications </span></a>*@
+
+                    <a asp-controller="Notification" asp-action="GetNotifications" class="nav-link nav-item">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge" id="notification-count" style="font-size: 100%">0</span>
+                    </a>
+
+                </div>
+
+                <a asp-controller="Account" asp-action="EditProfile" class="btn btn-link nav-link" id="AccountName"><b>@User.Identity.Name</b></a>
+
+                <form method="post" asp-controller="account" asp-action="LogOut">
+                    <button class="btn btn-link nav-link" id="logoutButton"><b> Logout </b></button>
+                </form>
+            </div>
+        }
+
+    </nav>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

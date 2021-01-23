@@ -1,0 +1,154 @@
+﻿@model EffortTrackingSystem.Models.Dtos.DepartmentMissionsCountDto
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Tasks Sent By @User.FindFirst(x => x.Type == "DepartmentName").Value Department</h2>
+
+@* Sent Missions *@
+<div class="row mb-5 mt-3">
+
+    <!-- Small boxes (Stat box) -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@Model.SRunningCount</h3>
+
+                <p>Running Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-bag"></i>*@
+                <i class="fa fa-spinner"></i>
+            </div>
+            @*<a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Received" asp-route-missionState="running" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-orange">
+            <div class="inner">
+                <h3>@Model.SWaitingCount</h3>
+
+                <p>Waiting Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-stats-bars"></i>*@
+                <i class="fa fa-exclamation"></i>
+            </div>
+            @*<a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Received" asp-route-missionState="waiting" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@Model.SApprovedCount</h3>
+
+                <p>Finished Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-person-add"></i>*@
+                <i class="fa fa-check-circle"></i>
+                @*<ion-icon name="checkmark-circle-outline"></ion-icon>*@
+            </div>
+            @*<a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Received" asp-route-missionState="completed" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@Model.SRefusedCount</h3>
+
+                <p>Refused Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-pie-graph"></i>*@
+                <i class="fa fa-times-circle"></i>
+            </div>
+            @*<a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Received" asp-route-missionState="refused" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+
+    <!-- ./col -->
+</div>
+<!-- /.row -->
+
+<h2>Tasks Received By @User.FindFirst(x => x.Type == "DepartmentName").Value Department</h2>
+
+<div class="row mb-5 mt-3">
+
+    <!-- Small boxes (Stat box) -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@Model.RRunningCount</h3>
+
+                <p>Running Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-bag"></i>*@
+                <i class="fa fa-spinner"></i>
+            </div>
+            @*<a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Received" asp-route-missionState="running" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-orange">
+            <div class="inner">
+                <h3>@Model.RWaitingCount</h3>
+
+                <p>Waiting Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-stats-bars"></i>*@
+                <i class="fa fa-exclamation"></i>
+            </div>
+            @*<a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Received" asp-route-missionState="waiting" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>@Model.RApprovedCount</h3>
+
+                <p>Finished Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-person-add"></i>*@
+                <i class="fa fa-check-circle"></i>
+                @*<ion-icon name="checkmark-circle-outline"></ion-icon>*@
+            </div>
+            @*<a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Received" asp-route-missionState="completed" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>@Model.RRefusedCount</h3>
+
+                <p>Refused Tasks</p>
+            </div>
+            <div class="icon">
+                @*<i class="ion ion-pie-graph"></i>*@
+                <i class="fa fa-times-circle"></i>
+            </div>
+            @*<a asp-controller="Mission" asp-action="GetAllFilteredMissions" asp-route-missionType="Received" asp-route-missionState="refused" asp-route-userId="@User.FindFirst(x => x.Type == System.Security.Claims.ClaimTypes.NameIdentifier).Value" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>*@
+        </div>
+    </div>
+
+    <!-- ./col -->
+</div>
+<!-- /.row -->

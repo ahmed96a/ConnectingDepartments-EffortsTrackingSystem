@@ -1,0 +1,170 @@
+﻿@model IEnumerable<EffortTrackingSystem.Models.Dtos.MissionDto>
+
+@{
+    ViewData["Title"] = "GetAllFilteredMissions";
+}
+
+<h1 class="text-center m-5">My @ViewBag.taskState Tasks</h1>
+
+
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            @if (ViewBag.missionType == "Sended")
+            {
+                <th>
+                    Receiver
+                </th>
+            }
+            else
+            {
+                <th>
+                    Sender
+                </th>
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.Priority)
+            </th>
+            <th>
+                Task Date
+            </th>
+            <th>
+                Expected Deadline
+            </th>
+            @if (ViewBag.taskState != "RUNNING" && ViewBag.taskState != "WAITING" && ViewBag.taskState != "REFUSED")
+            {
+                <th>
+                    Complete Date
+                </th>
+            }
+            @if (ViewBag.taskState != "RUNNING" && ViewBag.taskState != "WAITING" && ViewBag.taskState != "COMPLETED" && ViewBag.taskState != "APPROVED")
+            {
+                <th>
+                    Cancel Reason
+                </th>
+            }
+            <th>
+                Category
+            </th>
+
+            <th>
+                Actions
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @if (ViewBag.missionType == "Sended")
+            {
+        <td>
+            @Html.DisplayFor(modelItem => item.Receiver.FullName)
+        </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sender.FullName)
+                </td>
+            }
+
+            <td>
+                @* We should use enum instead of that *@
+                @{
+                    string result = "";
+                    var priority = item.Priority;
+                    if (priority == 0)
+                        result = "Low";
+                    else if (priority == 1)
+                        result = "Normal";
+                    else if (priority == 2)
+                        result = "High";
+                    else if (priority == 3)
+                        result = "Urgent";
+                }
+                @result
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expected_Deadline)
+            </td>
+            @if (ViewBag.taskState != "RUNNING" && ViewBag.taskState != "WAITING" && ViewBag.taskState != "REFUSED")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Task_CompleteDate)
+                </td>
+            }
+            @if (ViewBag.taskState != "RUNNING" && ViewBag.taskState != "WAITING" && ViewBag.taskState != "COMPLETED" && ViewBag.taskState != "APPROVED")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cancel_Reason)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "GetMission", new { id = item.Id }, new { @class = "btn btn-primary" })
+
+                @if (ViewBag.missionType == "Received")
+                {
+                    @if (ViewBag.taskState == "RUNNING")
+                    {
+                        <form asp-controller="Mission" asp-action="CompleteMission" method="post">
+                            <button class="btn btn-success mt-2">Complete</button>
+                            <input type="hidden" name="id" value="@item.Id" />
+                        </form>
+                    }
+                    else if (ViewBag.taskState == "WAITING")
+                    {
+                        <form asp-controller="Mission" asp-action="AcceptMission" method="post">
+                            <button class="btn btn-success mt-2">Accept</button>
+                            <input type="hidden" name="id" value="@item.Id" />
+                        </form>
+
+                        <form asp-controller="Mission" asp-action="RefuseMission" method="post">
+                            <button class="btn btn-danger mt-2">Refuse</button>
+                            <input type="hidden" name="id" value="@item.Id" />
+                        </form>
+                    }
+                    else if (ViewBag.taskState == "REFUSED")
+                    {
+                        <form asp-controller="Mission" asp-action="AcceptMission" method="post">
+                            <button class="btn btn-success mt-2">Accept</button>
+                            <input type="hidden" name="id" value="@item.Id" />
+                        </form>
+                    }
+                }
+                else
+                {
+                    if (ViewBag.taskState == "COMPLETED")
+                    {
+                        <form asp-controller="Mission" asp-action="ApproveMission" method="post">
+                            <button class="btn btn-success mt-2">Approve</button>
+                            <input type="hidden" name="id" value="@item.Id" />
+                        </form>
+                    }
+                }
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

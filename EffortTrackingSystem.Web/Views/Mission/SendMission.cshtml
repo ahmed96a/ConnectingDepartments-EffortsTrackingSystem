@@ -1,0 +1,143 @@
+﻿@using System.Security.Claims
+@model EffortTrackingSystem.Models.Dtos.CreateMissionDto
+
+@{
+    ViewData["Title"] = "Send Task";
+}
+
+<h1 class="text-center">Send Task</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SendMission" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input asp-for="SenderId" value="@User.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value" type="hidden" />
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Department_Id" class="control-label"></label>
+                <select asp-for="Department_Id" class="form-control" asp-items="@ViewBag.departments">
+                    <option value="">Select Department</option>
+                </select>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Category_Id" class="control-label"></label>
+                <select asp-for="Category_Id" class="form-control" disabled="disabled">
+                    <option value="">Select Category</option>
+                </select>
+                <span asp-validation-for="Category_Id" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReceiverId" class="control-label"></label>
+                <select asp-for="ReceiverId" class="form-control" disabled="disabled">
+                    <option value="">Select Employee, if you want.</option>
+                </select>
+                <span asp-validation-for="ReceiverId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Priority" class="control-label"></label>
+                <select asp-for="Priority" class="form-control">
+                    <option value="0">Low</option>
+                    <option value="1">Normal</option>
+                    <option value="2">High</option>
+                    <option value="3">Urgent</option>
+                </select>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Expected_Deadline" class="control-label"></label>
+                <input asp-for="Expected_Deadline" class="form-control" />
+                <span asp-validation-for="Expected_Deadline" class="text-danger"></span>
+            </div>
+            
+            @*<div class="form-group">
+                <label asp-for="Attachment_Url" class="control-label"></label>
+                <input asp-for="Attachment_Url" class="form-control" />
+                <span asp-validation-for="Attachment_Url" class="text-danger"></span>
+            </div>*@
+
+            <div class="form-group">
+                <input type="submit" value="Send Task" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        $(function () {
+
+            console.log("asd");
+            $("#Department_Id").on("change", function () {
+                //console.log("asd");
+                if ($(this).val() == "")
+                {
+                    $("#Category_Id").empty();
+                    $("#Category_Id").append("<option value=''>Select Category</option>");
+                    $("#Category_Id").attr("disabled", "disabled");
+
+                    $("#ReceiverId").empty();
+                    $("#ReceiverId").append("<option value=''>Select Employee</option>");
+                    $("#ReceiverId").attr("disabled", "disabled");
+                }
+                else
+                {
+                    var departmentId = $(this).val();
+                    $.ajax({
+                        type: 'Get',
+                        url: '/Category/GetAllCategoryJson?departmentId=' + departmentId,
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#Category_Id").removeAttr("disabled");
+                            $("#Category_Id").empty();
+                            $("#Category_Id").append("<option value=''>Select Category</option>");
+                            $.each(data, function (index, value) {
+                                $("#Category_Id").append(`<option value=${value.id}>${value.name}</option>`)
+                            });
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'Get',
+                        url: '/User/GetAllNonAdminUsersJson?departmentId=' + departmentId,
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#ReceiverId").removeAttr("disabled");
+                            $("#ReceiverId").empty();
+                            $("#ReceiverId").append("<option value=''>Select Employee, if you want</option>");
+                            $.each(data, function (index, value) {
+                                $("#ReceiverId").append(`<option value=${value.id}>${value.fullName}</option>`)
+                            });
+                        }
+                    });
+                }
+
+            });
+
+        });
+
+    </script>
+
+}

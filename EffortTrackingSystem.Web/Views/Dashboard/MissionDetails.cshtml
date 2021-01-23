@@ -1,0 +1,95 @@
+﻿@model EffortTrackingSystem.Models.Dtos.MissionDto
+
+@{
+    ViewData["Title"] = "MissionDetails";
+}
+
+<h1>MissionDetails</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            Sender
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sender.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            Receiver
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Receiver.FullName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+        <dd class="col-sm-10">
+            @* We should use enum instead of that *@
+            @{
+                string result = "";
+                var priority = Model.Priority;
+                if (priority == 0)
+                    result = "Low";
+                else if (priority == 1)
+                    result = "Normal";
+                else if (priority == 2)
+                    result = "High";
+                else if (priority == 3)
+                    result = "Urgent";
+            }
+            @result
+        </dd>
+        <dt class="col-sm-2">
+            Task Date
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Task_Date)
+        </dd>
+        <dt class="col-sm-2">
+            Expected Deadline
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Expected_Deadline)
+        </dd>
+        @if (Model.Is_Completed)
+        {
+            <dt class="col-sm-2">
+                Task Complete Date
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Task_CompleteDate)
+            </dd>
+        }
+        @if (Model.TaskState == 2)
+        {
+            <dt class="col-sm-2">
+                Cancel Reason
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cancel_Reason)
+            </dd>
+        }
+        <dt class="col-sm-2">
+            Category
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="DepartmentTasks" asp-route-id="@Model.Category.DepartmentId" asp-route-name="@ViewBag.Department" class="btn btn-info">Back to List</a>
+</div>
