@@ -55,5 +55,5 @@ Also it tracks the employees efforts (The tasks that the employee had completed)
 
 ## Application Live
 
-  [Application](http://armaniousit-001-site18.ctempurl.com/)<br>
-  [API Documentation](http://armaniousit-001-site13.ctempurl.com/swagger/index.html)
+  - [Application](http://armaniousit-001-site18.ctempurl.com/)<br>
+  - [API Documentation](http://armaniousit-001-site13.ctempurl.com/swagger/index.html)
