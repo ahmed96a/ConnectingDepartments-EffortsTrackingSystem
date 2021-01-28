@@ -201,7 +201,7 @@ namespace EffortTrackingSystem.API
             app.UseCors(configurePolicy =>
             {
 
-                configurePolicy.WithOrigins("http://localhost:55791")
+                configurePolicy.WithOrigins(Configuration["FrontProject:URL"])
                                .AllowAnyHeader()
                                .WithMethods("GET", "POST")
                                .AllowCredentials();

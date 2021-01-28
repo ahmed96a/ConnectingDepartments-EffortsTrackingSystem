@@ -286,7 +286,7 @@ namespace EffortTrackingSystem.Web.Controllers
                 {
                     var accountLoginResponse = (AccountLoginResponse)result;
 
-                    #region Set the token in the session, For Backend Authentication
+                    #region Store the token, For Backend Authentication
                     // ---------------------------------
 
                     #region Cookie To Store Token
@@ -302,8 +302,10 @@ namespace EffortTrackingSystem.Web.Controllers
                     //HttpContext.Session.SetString("JWToken", accountLoginResponse.Token);
                     #endregion
 
-                    TempData["JWToken"] = accountLoginResponse.Token; // to use it by javascript to save the token in the browser so we can use it in signalr.
-
+                    #region TempData To Store Token In the browser LocalStorage in _Layout page when we redirected to it by that line "return RedirectToAction("Index", "Home");".
+                    //TempData["JWToken"] = accountLoginResponse.Token; // to use it by javascript to save the token in the browser so we can use it in signalr.
+                    #endregion
+                    
                     // ---------------------------------
                     #endregion
 
@@ -377,6 +379,11 @@ namespace EffortTrackingSystem.Web.Controllers
             }
         }
 
+        [Authorize]
+        public JsonResult GetJWTokenFromCookie()
+        {
+            return Json(Request.Cookies["JWToken"]);
+        }
 
         [Authorize]
         [HttpGet]
